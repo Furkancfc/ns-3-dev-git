@@ -1,4 +1,23 @@
+# Include the MAVLink module
+include(${CMAKE_SOURCE_DIR}/cmake/mavlink.cmake)
+
 set(target_prefix scratch_)
+
+# Handle mavlink-sim separately and first
+if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/mavlink-sim.cc)
+  build_exec(
+    EXECNAME mavlink-sim
+    SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/mavlink-sim.cc
+    LIBRARIES_TO_LINK "${ns3-libs}" "${ns3-contrib-libs}"
+    EXECUTABLE_DIRECTORY_PATH ${CMAKE_OUTPUT_DIRECTORY}/
+  )
+  # Apply MAVLink settings to our target
+  disable_mavlink_warnings(scratch_mavlink-sim)
+  add_mavlink_includes(scratch_mavlink-sim)
+  
+  # Remove mavlink-sim.cc from the list of files to process
+  list(REMOVE_ITEM single_source_file_scratches ${CMAKE_CURRENT_SOURCE_DIR}/mavlink-sim.cc)
+endif()
 
 function(create_scratch source_files)
   # Return early if no sources in the subdirectory
@@ -6,6 +25,17 @@ function(create_scratch source_files)
   if(number_sources EQUAL 0)
     return()
   endif()
+
+  # Get source name from the first file in the list
+  list(GET source_files 0 first_source)
+  get_filename_component(scratch_name ${first_source} NAME)
+  string(REGEX REPLACE "\\..*$" "" scratch_name "${scratch_name}")
+  # Skip mavlink-sim as it's handled separately
+  if(${scratch_name} STREQUAL "mavlink-sim")
+    return()
+  endif()
+
+  # Regular scratch handling
 
   # If the scratch has more than a source file, we need to find the source with
   # the main function
@@ -38,19 +68,6 @@ function(create_scratch source_files)
                  "${scratch_dirname}"
   )
   string(REPLACE "/" "_" scratch_dirname "${scratch_dirname}")
-
-  # Get source name
-  if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.14.0")
-    get_filename_component(scratch_name ${scratch_src} NAME_WLE)
-  else()
-    get_filename_component(scratch_name ${scratch_src} NAME)
-    string(FIND "${scratch_name}" "." ext_position REVERSE)
-    if(${ext_position} EQUAL -1)
-      message(FATAL_ERROR "Source file has no extension: ${scratch_src}")
-    else()
-      string(SUBSTRING "${scratch_name}" 0 ${ext_position} scratch_name)
-    endif()
-  endif()
 
   set(target_prefix scratch_)
   if(scratch_dirname)

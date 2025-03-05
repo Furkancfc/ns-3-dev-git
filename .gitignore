@@ -30,12 +30,10 @@ ms_print.*
 massif.*
 coverity
 TAGS
-
+build/
 .lock-ns3_*
 .ns3rc
 
-build-dir/
-build/
 /.cproject
 /.project
 
