@@ -417,6 +417,12 @@ LIBXML2_XMLLINT_EXECUTABLE:FILEPATH=/usr/bin/xmllint
 //Path to a program.
 LLD:FILEPATH=LLD-NOTFOUND
 
+//Path to a file.
+MAVLINK_INCLUDE_DIR:PATH=/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/mavlink/generated/include
+
+//MAVLink root directory
+MAVLINK_ROOT:PATH=/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/mavlink
+
 //Path to a program.
 MOLD:FILEPATH=MOLD-NOTFOUND
 
@@ -628,6 +634,9 @@ SQLite3_header_internal_sqlite3.h:FILEPATH=/usr/include/sqlite3.h
 //Path to a library.
 SQLite3_library_internal_sqlite3:FILEPATH=/usr/lib/x86_64-linux-gnu/libsqlite3.so
 
+//Path to a program.
+VALGRIND:FILEPATH=/usr/bin/valgrind
+
 //The directory containing a CMake configuration file for boost_headers.
 boost_headers_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.83.0
 
@@ -723,6 +732,8 @@ CMAKE_C_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 CMAKE_C_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_DLLTOOL
 CMAKE_DLLTOOL-ADVANCED:INTERNAL=1
+//Path to cache edit program executable.
+CMAKE_EDIT_COMMAND:INTERNAL=/usr/bin/cmake-gui
 //Executable file format
 CMAKE_EXECUTABLE_FORMAT:INTERNAL=ELF
 //ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS
@@ -805,7 +816,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=43
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=47
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -1178,6 +1189,8 @@ SPHINX_WARNINGS_AS_ERRORS-ADVANCED:INTERNAL=1
 SQLite3_header_internal_sqlite3.h-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: SQLite3_library_internal_sqlite3
 SQLite3_library_internal_sqlite3-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: VALGRIND
+VALGRIND-ADVANCED:INTERNAL=1
 //linker supports push/pop state
 _CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED:INTERNAL=TRUE
 //CMAKE_INSTALL_PREFIX during last run
@@ -1206,6 +1219,12 @@ click_header_internal_simclick.h-ADVANCED:INTERNAL=1
 click_library_internal_click-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: click_library_internal_nsclick
 click_library_internal_nsclick-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: libCMakeFiles
+libCMakeFiles-ADVANCED:INTERNAL=1
+libCMakeFiles:INTERNAL=CMakeFiles
+//ADVANCED property for variable: libCMakeFiles-obj
+libCMakeFiles-obj-ADVANCED:INTERNAL=1
+libCMakeFiles-obj:INTERNAL=CMakeFiles-obj
 //ADVANCED property for variable: libantenna
 libantenna-ADVANCED:INTERNAL=1
 libantenna:INTERNAL=antenna
@@ -1479,7 +1498,7 @@ libzigbee-obj:INTERNAL=zigbee-obj
 //ADVANCED property for variable: ns3-all-enabled-modules
 ns3-all-enabled-modules-ADVANCED:INTERNAL=1
 //list with all enabled modules
-ns3-all-enabled-modules:INTERNAL=antenna;aodv;applications;bridge;brite;buildings;click;config-store;core;csma;csma-layout;dsdv;dsr;energy;fd-net-device;flow-monitor;internet;internet-apps;lr-wpan;lte;mavlink;mesh;mobility;mpi;netanim;network;nix-vector-routing;olsr;openflow;point-to-point;point-to-point-layout;propagation;sixlowpan;spectrum;stats;tap-bridge;test;topology-read;traffic-control;uan;virtual-net-device;visualizer;wifi;wimax;zigbee;
+ns3-all-enabled-modules:INTERNAL=CMakeFiles;antenna;aodv;applications;bridge;brite;buildings;click;config-store;core;csma;csma-layout;dsdv;dsr;energy;fd-net-device;flow-monitor;internet;internet-apps;lr-wpan;lte;mavlink;mesh;mobility;mpi;netanim;network;nix-vector-routing;olsr;openflow;point-to-point;point-to-point-layout;propagation;sixlowpan;spectrum;stats;tap-bridge;test;topology-read;traffic-control;uan;virtual-net-device;visualizer;wifi;wimax;zigbee;
 //ADVANCED property for variable: ns3-contrib-libs
 ns3-contrib-libs-ADVANCED:INTERNAL=1
 //list of processed contrib modules
@@ -1491,11 +1510,11 @@ ns3-example-folders:INTERNAL=
 //ADVANCED property for variable: ns3-execs
 ns3-execs-ADVANCED:INTERNAL=1
 //list of c++ executables
-ns3-execs:INTERNAL=/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/src/tap-bridge/ns3-dev-tap-creator-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/src/fd-net-device/ns3-dev-tap-device-creator-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/src/fd-net-device/ns3-dev-raw-sock-creator-default;
+ns3-execs:INTERNAL=/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/utils/perf/ns3-dev-perf-io-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/utils/ns3-dev-print-introspected-doxygen-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/utils/ns3-dev-bench-packets-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/utils/ns3-dev-bench-scheduler-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/scratch/ns3-dev-scratch-simulator-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/src/tap-bridge/ns3-dev-tap-creator-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/src/fd-net-device/ns3-dev-tap-device-creator-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/src/fd-net-device/ns3-dev-raw-sock-creator-default;
 //ADVANCED property for variable: ns3-execs-clean
 ns3-execs-clean-ADVANCED:INTERNAL=1
 //list of c++ executables without version prefix and build suffix
-ns3-execs-clean:INTERNAL=tap-creator;tap-device-creator;raw-sock-creator;
+ns3-execs-clean:INTERNAL=perf-io;print-introspected-doxygen;bench-packets;bench-scheduler;scratch_scratch-simulator;tap-creator;tap-device-creator;raw-sock-creator;
 //ADVANCED property for variable: ns3-execs-py
 ns3-execs-py-ADVANCED:INTERNAL=1
 //list of python scripts

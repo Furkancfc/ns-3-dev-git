@@ -194,6 +194,7 @@ process_options()
 # Build NS3 library core
 add_subdirectory(src)
 include_directories(${CMAKE_SOURCE_DIR}/src/)
+add_subdirectory(simulation_1)
 
 # Build NS library examples
 add_subdirectory(examples)
