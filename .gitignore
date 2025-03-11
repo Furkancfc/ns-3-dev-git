@@ -46,5 +46,6 @@ vcpkg/
 
 .vs/
 
+
 # Ignore local cache used by e.g. clangd
 .cache/
