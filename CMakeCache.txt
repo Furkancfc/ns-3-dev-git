@@ -52,6 +52,9 @@ CMAKE_CXX_FLAGS:STRING=
 //Flags used by the CXX compiler during DEBUG builds.
 CMAKE_CXX_FLAGS_DEBUG:STRING=-g
 
+//Flags used by the CXX compiler during DEFAULT builds.
+CMAKE_CXX_FLAGS_DEFAULT:STRING=
+
 //Flags used by the CXX compiler during MINSIZEREL builds.
 CMAKE_CXX_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG
 
@@ -78,6 +81,9 @@ CMAKE_C_FLAGS:STRING=
 //Flags used by the C compiler during DEBUG builds.
 CMAKE_C_FLAGS_DEBUG:STRING=-g
 
+//Flags used by the C compiler during DEFAULT builds.
+CMAKE_C_FLAGS_DEFAULT:STRING=
+
 //Flags used by the C compiler during MINSIZEREL builds.
 CMAKE_C_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG
 
@@ -95,6 +101,9 @@ CMAKE_EXE_LINKER_FLAGS:STRING=
 
 //Flags used by the linker during DEBUG builds.
 CMAKE_EXE_LINKER_FLAGS_DEBUG:STRING=
+
+//Flags used by the linker during DEFAULT builds.
+CMAKE_EXE_LINKER_FLAGS_DEFAULT:STRING=
 
 //Flags used by the linker during MINSIZEREL builds.
 CMAKE_EXE_LINKER_FLAGS_MINSIZEREL:STRING=
@@ -180,6 +189,10 @@ CMAKE_MODULE_LINKER_FLAGS:STRING=
 CMAKE_MODULE_LINKER_FLAGS_DEBUG:STRING=
 
 //Flags used by the linker during the creation of modules during
+// DEFAULT builds.
+CMAKE_MODULE_LINKER_FLAGS_DEFAULT:STRING=
+
+//Flags used by the linker during the creation of modules during
 // MINSIZEREL builds.
 CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL:STRING=
 
@@ -224,6 +237,10 @@ CMAKE_SHARED_LINKER_FLAGS:STRING=
 CMAKE_SHARED_LINKER_FLAGS_DEBUG:STRING=
 
 //Flags used by the linker during the creation of shared libraries
+// during DEFAULT builds.
+CMAKE_SHARED_LINKER_FLAGS_DEFAULT:STRING=
+
+//Flags used by the linker during the creation of shared libraries
 // during MINSIZEREL builds.
 CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL:STRING=
 
@@ -249,6 +266,10 @@ CMAKE_STATIC_LINKER_FLAGS:STRING=
 //Flags used by the linker during the creation of static libraries
 // during DEBUG builds.
 CMAKE_STATIC_LINKER_FLAGS_DEBUG:STRING=
+
+//Flags used by the linker during the creation of static libraries
+// during DEFAULT builds.
+CMAKE_STATIC_LINKER_FLAGS_DEFAULT:STRING=
 
 //Flags used by the linker during the creation of static libraries
 // during MINSIZEREL builds.
@@ -708,6 +729,8 @@ CMAKE_CXX_COMPILER_RANLIB-ADVANCED:INTERNAL=1
 CMAKE_CXX_FLAGS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_FLAGS_DEBUG
 CMAKE_CXX_FLAGS_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_CXX_FLAGS_DEFAULT
+CMAKE_CXX_FLAGS_DEFAULT-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_FLAGS_MINSIZEREL
 CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_FLAGS_RELEASE
@@ -724,6 +747,8 @@ CMAKE_C_COMPILER_RANLIB-ADVANCED:INTERNAL=1
 CMAKE_C_FLAGS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_C_FLAGS_DEBUG
 CMAKE_C_FLAGS_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_C_FLAGS_DEFAULT
+CMAKE_C_FLAGS_DEFAULT-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_C_FLAGS_MINSIZEREL
 CMAKE_C_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_C_FLAGS_RELEASE
@@ -740,6 +765,8 @@ CMAKE_EXECUTABLE_FORMAT:INTERNAL=ELF
 CMAKE_EXE_LINKER_FLAGS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_DEBUG
 CMAKE_EXE_LINKER_FLAGS_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_DEFAULT
+CMAKE_EXE_LINKER_FLAGS_DEFAULT-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_MINSIZEREL
 CMAKE_EXE_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_RELEASE
@@ -807,6 +834,8 @@ CMAKE_MAKE_PROGRAM-ADVANCED:INTERNAL=1
 CMAKE_MODULE_LINKER_FLAGS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_DEBUG
 CMAKE_MODULE_LINKER_FLAGS_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_DEFAULT
+CMAKE_MODULE_LINKER_FLAGS_DEFAULT-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL
 CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_RELEASE
@@ -816,7 +845,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=47
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=50
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -833,6 +862,8 @@ CMAKE_ROOT:INTERNAL=/usr/share/cmake-3.28
 CMAKE_SHARED_LINKER_FLAGS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_DEBUG
 CMAKE_SHARED_LINKER_FLAGS_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_DEFAULT
+CMAKE_SHARED_LINKER_FLAGS_DEFAULT-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL
 CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_RELEASE
@@ -847,6 +878,8 @@ CMAKE_SKIP_RPATH-ADVANCED:INTERNAL=1
 CMAKE_STATIC_LINKER_FLAGS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_DEBUG
 CMAKE_STATIC_LINKER_FLAGS_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_DEFAULT
+CMAKE_STATIC_LINKER_FLAGS_DEFAULT-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL
 CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_RELEASE
@@ -1510,11 +1543,11 @@ ns3-example-folders:INTERNAL=
 //ADVANCED property for variable: ns3-execs
 ns3-execs-ADVANCED:INTERNAL=1
 //list of c++ executables
-ns3-execs:INTERNAL=/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/utils/perf/ns3-dev-perf-io-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/utils/ns3-dev-print-introspected-doxygen-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/utils/ns3-dev-bench-packets-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/utils/ns3-dev-bench-scheduler-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/scratch/ns3-dev-scratch-simulator-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/src/tap-bridge/ns3-dev-tap-creator-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/src/fd-net-device/ns3-dev-tap-device-creator-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/src/fd-net-device/ns3-dev-raw-sock-creator-default;
+ns3-execs:INTERNAL=/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/utils/perf/ns3-dev-perf-io-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/utils/ns3-dev-print-introspected-doxygen-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/utils/ns3-dev-bench-packets-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/utils/ns3-dev-bench-scheduler-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/scratch/subdir/ns3-dev-scratch-subdir-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/scratch/nested-subdir/ns3-dev-scratch-nested-subdir-executable-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/scratch/ns3-dev-scratch-simulator-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/src/tap-bridge/ns3-dev-tap-creator-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/src/fd-net-device/ns3-dev-tap-device-creator-default;/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/src/fd-net-device/ns3-dev-raw-sock-creator-default;
 //ADVANCED property for variable: ns3-execs-clean
 ns3-execs-clean-ADVANCED:INTERNAL=1
 //list of c++ executables without version prefix and build suffix
-ns3-execs-clean:INTERNAL=perf-io;print-introspected-doxygen;bench-packets;bench-scheduler;scratch_scratch-simulator;tap-creator;tap-device-creator;raw-sock-creator;
+ns3-execs-clean:INTERNAL=perf-io;print-introspected-doxygen;bench-packets;bench-scheduler;scratch_subdir_scratch-subdir;scratch_nested-subdir_scratch-nested-subdir-executable;scratch_scratch-simulator;tap-creator;tap-device-creator;raw-sock-creator;
 //ADVANCED property for variable: ns3-execs-py
 ns3-execs-py-ADVANCED:INTERNAL=1
 //list of python scripts

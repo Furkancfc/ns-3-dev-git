@@ -10,9 +10,9 @@ set(OLD_GLOB
   "/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/scratch/CMakeLists.txt"
   "/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/scratch/Makefile"
   "/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/scratch/cmake_install.cmake"
-  "/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/scratch/cmake_minimum_required(VERSION 3.cmake"
+  "/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/scratch/nested-subdir"
   "/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/scratch/scratch-simulator.cc"
-  "/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/scratch/simulation_1"
+  "/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/scratch/subdir"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
@@ -32,6 +32,17 @@ endif()
 file(GLOB NEW_GLOB LIST_DIRECTORIES true "/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/scratch/[^.]*.cc")
 set(OLD_GLOB
   "/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/scratch/scratch-simulator.cc"
+  )
+if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
+  message("-- GLOB mismatch!")
+  file(TOUCH_NOCREATE "/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/CMakeFiles/cmake.verify_globs")
+endif()
+
+# scratch_sources at scratch/CMakeLists.txt:108 (file)
+file(GLOB NEW_GLOB LIST_DIRECTORIES true "/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/scratch/subdir/[^.]*.cc")
+set(OLD_GLOB
+  "/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/scratch/subdir/scratch-subdir-additional-header.cc"
+  "/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/scratch/subdir/scratch-subdir.cc"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")

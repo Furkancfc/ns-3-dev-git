@@ -9,7 +9,7 @@
             "command": "./ns3",
             "group": {
                 "kind": "build",
-                "isDefault": true
+                "isDefault": false,
             }
         },
         {
@@ -18,8 +18,17 @@
             "command": "./test.py",
             "group": {
                 "kind": "test",
-                "isDefault": true
+                "isDefault": false,
             }
+        },
+        {
+            "label": "Build simulation_1",
+            "type": "shell",
+            "command": " /usr/bin/cmake --build /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build --config Debug --target simulation_1 -j 14 --",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
         }
     ]
 }

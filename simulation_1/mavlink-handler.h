@@ -1,85 +1,68 @@
 #ifndef MAVLINK_HANDLER_H
 #define MAVLINK_HANDLER_H
 
-#include <mavlink/v2.0/common/mavlink.h>
-#include <arpa/inet.h>
-#include <sys/socket.h>
-#include <unistd.h>
-#include <iostream>
 #include <functional>
+#include <iostream>
+#include <optional>
 #include <cstring>
+#include <arpa/inet.h>
+#include <mavlink/v2.0/common/mavlink.h>
 
 class MavlinkHandler {
 private:
     int sockfd;
-    struct sockaddr_in mavproxyAddr;
+    sockaddr_in mavproxyAddr;
     std::function<void(uint32_t)> nodeCountCallback;
     uint8_t system_id;
     uint8_t component_id;
-
-    bool setupSocket() {
-        int reuseAddr = 1;
-        setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &reuseAddr, sizeof(reuseAddr));
-        
-        // Bind to TAP interface
-        struct sockaddr_in addr;
-        memset(&addr, 0, sizeof(addr));
-        addr.sin_family = AF_INET;
-        addr.sin_addr.s_addr = inet_addr("10.0.0.1");  // NS3_IP
-        addr.sin_port = htons(14552);  // NS3_PORT
-        
-        if (bind(sockfd, (struct sockaddr*)&addr, sizeof(addr)) < 0) {
-            std::cerr << "Bind failed: " << strerror(errno) << std::endl;
-            return false;
-        }
-        return true;
-    }
+    bool receivedHeartbeat = false;
 
 public:
-    MavlinkHandler(const std::string& ip, uint16_t port, uint8_t sysid = 1, uint8_t compid = MAV_COMP_ID_UDP_BRIDGE) 
-        : system_id(sysid), component_id(compid) {
+    MavlinkHandler(const std::string& ip, uint16_t port) {
         sockfd = socket(AF_INET, SOCK_DGRAM, 0);
         if (sockfd < 0) {
-            std::cerr << "Failed to create socket: " << strerror(errno) << std::endl;
+            perror("socket creation failed");
             exit(EXIT_FAILURE);
         }
 
+        memset(&mavproxyAddr, 0, sizeof(mavproxyAddr));
         mavproxyAddr.sin_family = AF_INET;
         mavproxyAddr.sin_port = htons(port);
         inet_pton(AF_INET, ip.c_str(), &mavproxyAddr.sin_addr);
 
-        if (!setupSocket()) {
-            close(sockfd);
+        if (bind(sockfd, (const struct sockaddr *)&mavproxyAddr, sizeof(mavproxyAddr)) < 0) {
+            perror("bind failed");
             exit(EXIT_FAILURE);
         }
-        
-        std::cout << "MavlinkHandler initialized on port 14552" << std::endl;
+
+        std::cout << "MavlinkHandler initialized on " << ip << ":" << port << std::endl;
     }
 
     ~MavlinkHandler() {
-        close(sockfd);
+        ::close(sockfd);
     }
 
-    struct sockaddr_in GetMavProxyAddress(){
-        return mavproxyAddr;
-    }
     void SetNodeCountCallback(std::function<void(uint32_t)> callback) {
         nodeCountCallback = callback;
     }
 
-    void ReceiveMessages() {
-        uint8_t buffer[1024];
-        socklen_t addrLen = sizeof(mavproxyAddr);
-        ssize_t recvLen = recvfrom(sockfd, buffer, sizeof(buffer), 0, (struct sockaddr*)&mavproxyAddr, &addrLen);
-        if (recvLen > 0) {
-            mavlink_message_t msg;
-            mavlink_status_t status;
-            for (ssize_t i = 0; i < recvLen; ++i) {
-                if (mavlink_parse_char(MAVLINK_COMM_0, buffer[i], &msg, &status)) {
-                    HandleMessage(msg);
+    bool HasReceivedHeartbeat() const {
+        return receivedHeartbeat;
+    }
+
+    std::optional<mavlink_message_t> ReceiveMessages() {
+        mavlink_message_t msg;
+        mavlink_status_t status;
+        uint8_t buf[2048];
+        ssize_t len = recv(sockfd, buf, sizeof(buf), MSG_DONTWAIT);
+        if (len > 0) {
+            for (ssize_t i = 0; i < len; ++i) {
+                if (mavlink_parse_char(MAVLINK_COMM_0, buf[i], &msg, &status)) {
+                    return msg;
                 }
             }
         }
+        return std::nullopt;
     }
 
     void HandleMessage(const mavlink_message_t& msg) {
@@ -87,6 +70,7 @@ public:
             case MAVLINK_MSG_ID_HEARTBEAT: {
                 mavlink_heartbeat_t heartbeat;
                 mavlink_msg_heartbeat_decode(&msg, &heartbeat);
+                receivedHeartbeat = true; // Set flag when heartbeat is received
                 // Send heartbeat response
                 mavlink_message_t response;
                 mavlink_msg_heartbeat_pack(system_id, component_id, &response,
@@ -131,10 +115,14 @@ public:
     }
 
     void SendMessage(const mavlink_message_t& msg) {
-        uint8_t buffer[1024];
-        uint16_t len = mavlink_msg_to_send_buffer(buffer, &msg);
-        sendto(sockfd, buffer, len, 0, (struct sockaddr*)&mavproxyAddr, sizeof(mavproxyAddr));
+        uint8_t buf[MAVLINK_MAX_PACKET_LEN];
+        uint16_t len = mavlink_msg_to_send_buffer(buf, &msg);
+        sendto(sockfd, buf, len, 0, (const struct sockaddr *)&mavproxyAddr, sizeof(mavproxyAddr));
+    }
+
+    sockaddr_in GetMavProxyAddress() const {
+        return mavproxyAddr;
     }
 };
 
-#endif // MAVLINK_HANDLER_H
+#endif

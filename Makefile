@@ -1424,6 +1424,123 @@ zigbee/fast:
 .PHONY : zigbee/fast
 
 #=============================================================================
+# Target rules for targets named simulation_1
+
+# Build rule for target.
+simulation_1: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 simulation_1
+.PHONY : simulation_1
+
+# fast build rule for target.
+simulation_1/fast:
+	$(MAKE) $(MAKESILENT) -f simulation_1/CMakeFiles/simulation_1.dir/build.make simulation_1/CMakeFiles/simulation_1.dir/build
+.PHONY : simulation_1/fast
+
+#=============================================================================
+# Target rules for targets named run-simulation_1
+
+# Build rule for target.
+run-simulation_1: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 run-simulation_1
+.PHONY : run-simulation_1
+
+# fast build rule for target.
+run-simulation_1/fast:
+	$(MAKE) $(MAKESILENT) -f simulation_1/CMakeFiles/run-simulation_1.dir/build.make simulation_1/CMakeFiles/run-simulation_1.dir/build
+.PHONY : run-simulation_1/fast
+
+#=============================================================================
+# Target rules for targets named clean-simulation_1
+
+# Build rule for target.
+clean-simulation_1: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean-simulation_1
+.PHONY : clean-simulation_1
+
+# fast build rule for target.
+clean-simulation_1/fast:
+	$(MAKE) $(MAKESILENT) -f simulation_1/CMakeFiles/clean-simulation_1.dir/build.make simulation_1/CMakeFiles/clean-simulation_1.dir/build
+.PHONY : clean-simulation_1/fast
+
+#=============================================================================
+# Target rules for targets named simulation_2
+
+# Build rule for target.
+simulation_2: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 simulation_2
+.PHONY : simulation_2
+
+# fast build rule for target.
+simulation_2/fast:
+	$(MAKE) $(MAKESILENT) -f simulation_2/CMakeFiles/simulation_2.dir/build.make simulation_2/CMakeFiles/simulation_2.dir/build
+.PHONY : simulation_2/fast
+
+#=============================================================================
+# Target rules for targets named run-simulation_2
+
+# Build rule for target.
+run-simulation_2: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 run-simulation_2
+.PHONY : run-simulation_2
+
+# fast build rule for target.
+run-simulation_2/fast:
+	$(MAKE) $(MAKESILENT) -f simulation_2/CMakeFiles/run-simulation_2.dir/build.make simulation_2/CMakeFiles/run-simulation_2.dir/build
+.PHONY : run-simulation_2/fast
+
+#=============================================================================
+# Target rules for targets named clean-simulation_2
+
+# Build rule for target.
+clean-simulation_2: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean-simulation_2
+.PHONY : clean-simulation_2
+
+# fast build rule for target.
+clean-simulation_2/fast:
+	$(MAKE) $(MAKESILENT) -f simulation_2/CMakeFiles/clean-simulation_2.dir/build.make simulation_2/CMakeFiles/clean-simulation_2.dir/build
+.PHONY : clean-simulation_2/fast
+
+#=============================================================================
+# Target rules for targets named simulation_3
+
+# Build rule for target.
+simulation_3: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 simulation_3
+.PHONY : simulation_3
+
+# fast build rule for target.
+simulation_3/fast:
+	$(MAKE) $(MAKESILENT) -f simulation_3/CMakeFiles/simulation_3.dir/build.make simulation_3/CMakeFiles/simulation_3.dir/build
+.PHONY : simulation_3/fast
+
+#=============================================================================
+# Target rules for targets named run-simulation_3
+
+# Build rule for target.
+run-simulation_3: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 run-simulation_3
+.PHONY : run-simulation_3
+
+# fast build rule for target.
+run-simulation_3/fast:
+	$(MAKE) $(MAKESILENT) -f simulation_3/CMakeFiles/run-simulation_3.dir/build.make simulation_3/CMakeFiles/run-simulation_3.dir/build
+.PHONY : run-simulation_3/fast
+
+#=============================================================================
+# Target rules for targets named clean-simulation_3
+
+# Build rule for target.
+clean-simulation_3: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean-simulation_3
+.PHONY : clean-simulation_3
+
+# fast build rule for target.
+clean-simulation_3/fast:
+	$(MAKE) $(MAKESILENT) -f simulation_3/CMakeFiles/clean-simulation_3.dir/build.make simulation_3/CMakeFiles/clean-simulation_3.dir/build
+.PHONY : clean-simulation_3/fast
+
+#=============================================================================
 # Target rules for targets named scratch_scratch-simulator
 
 # Build rule for target.
@@ -1437,30 +1554,43 @@ scratch_scratch-simulator/fast:
 .PHONY : scratch_scratch-simulator/fast
 
 #=============================================================================
-# Target rules for targets named scratch_simulation_1
+# Target rules for targets named scratch_subdir_scratch-subdir
 
 # Build rule for target.
-scratch_simulation_1: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 scratch_simulation_1
-.PHONY : scratch_simulation_1
+scratch_subdir_scratch-subdir: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 scratch_subdir_scratch-subdir
+.PHONY : scratch_subdir_scratch-subdir
 
 # fast build rule for target.
-scratch_simulation_1/fast:
-	$(MAKE) $(MAKESILENT) -f scratch/simulation_1/CMakeFiles/scratch_simulation_1.dir/build.make scratch/simulation_1/CMakeFiles/scratch_simulation_1.dir/build
-.PHONY : scratch_simulation_1/fast
+scratch_subdir_scratch-subdir/fast:
+	$(MAKE) $(MAKESILENT) -f scratch/CMakeFiles/scratch_subdir_scratch-subdir.dir/build.make scratch/CMakeFiles/scratch_subdir_scratch-subdir.dir/build
+.PHONY : scratch_subdir_scratch-subdir/fast
 
 #=============================================================================
-# Target rules for targets named run-simulation_1
+# Target rules for targets named scratch-nested-subdir-lib
 
 # Build rule for target.
-run-simulation_1: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 run-simulation_1
-.PHONY : run-simulation_1
+scratch-nested-subdir-lib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 scratch-nested-subdir-lib
+.PHONY : scratch-nested-subdir-lib
 
 # fast build rule for target.
-run-simulation_1/fast:
-	$(MAKE) $(MAKESILENT) -f scratch/simulation_1/CMakeFiles/run-simulation_1.dir/build.make scratch/simulation_1/CMakeFiles/run-simulation_1.dir/build
-.PHONY : run-simulation_1/fast
+scratch-nested-subdir-lib/fast:
+	$(MAKE) $(MAKESILENT) -f scratch/nested-subdir/CMakeFiles/scratch-nested-subdir-lib.dir/build.make scratch/nested-subdir/CMakeFiles/scratch-nested-subdir-lib.dir/build
+.PHONY : scratch-nested-subdir-lib/fast
+
+#=============================================================================
+# Target rules for targets named scratch_nested-subdir_scratch-nested-subdir-executable
+
+# Build rule for target.
+scratch_nested-subdir_scratch-nested-subdir-executable: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 scratch_nested-subdir_scratch-nested-subdir-executable
+.PHONY : scratch_nested-subdir_scratch-nested-subdir-executable
+
+# fast build rule for target.
+scratch_nested-subdir_scratch-nested-subdir-executable/fast:
+	$(MAKE) $(MAKESILENT) -f scratch/nested-subdir/CMakeFiles/scratch_nested-subdir_scratch-nested-subdir-executable.dir/build.make scratch/nested-subdir/CMakeFiles/scratch_nested-subdir_scratch-nested-subdir-executable.dir/build
+.PHONY : scratch_nested-subdir_scratch-nested-subdir-executable/fast
 
 #=============================================================================
 # Target rules for targets named bench-scheduler
@@ -1528,12 +1658,17 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... assemble-introspected-command-line"
 	@echo "... check-version"
+	@echo "... clean-simulation_1"
+	@echo "... clean-simulation_2"
+	@echo "... clean-simulation_3"
 	@echo "... copy_all_headers"
 	@echo "... doxygen"
 	@echo "... doxygen-no-build"
 	@echo "... run-introspected-command-line"
 	@echo "... run-print-introspected-doxygen"
 	@echo "... run-simulation_1"
+	@echo "... run-simulation_2"
+	@echo "... run-simulation_3"
 	@echo "... sphinx"
 	@echo "... sphinx_contributing"
 	@echo "... sphinx_installation"
@@ -1615,8 +1750,13 @@ help:
 	@echo "... print-introspected-doxygen"
 	@echo "... propagation"
 	@echo "... raw-sock-creator"
+	@echo "... scratch-nested-subdir-lib"
+	@echo "... scratch_nested-subdir_scratch-nested-subdir-executable"
 	@echo "... scratch_scratch-simulator"
-	@echo "... scratch_simulation_1"
+	@echo "... scratch_subdir_scratch-subdir"
+	@echo "... simulation_1"
+	@echo "... simulation_2"
+	@echo "... simulation_3"
 	@echo "... sixlowpan"
 	@echo "... spectrum"
 	@echo "... stats"

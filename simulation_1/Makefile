@@ -132,14 +132,14 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(CMAKE_COMMAND) -E cmake_progress_start /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/CMakeFiles /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/scratch/simulation_1//CMakeFiles/progress.marks
-	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 scratch/simulation_1/all
+	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(CMAKE_COMMAND) -E cmake_progress_start /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/CMakeFiles /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_1//CMakeFiles/progress.marks
+	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 simulation_1/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 scratch/simulation_1/clean
+	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 simulation_1/clean
 .PHONY : clean
 
 # The main clean target
@@ -148,12 +148,12 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 scratch/simulation_1/preinstall
+	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 simulation_1/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 scratch/simulation_1/preinstall
+	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 simulation_1/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
@@ -163,56 +163,70 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-scratch/simulation_1/CMakeFiles/scratch_simulation_1.dir/rule:
-	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 scratch/simulation_1/CMakeFiles/scratch_simulation_1.dir/rule
-.PHONY : scratch/simulation_1/CMakeFiles/scratch_simulation_1.dir/rule
+simulation_1/CMakeFiles/simulation_1.dir/rule:
+	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 simulation_1/CMakeFiles/simulation_1.dir/rule
+.PHONY : simulation_1/CMakeFiles/simulation_1.dir/rule
 
 # Convenience name for target.
-scratch_simulation_1: scratch/simulation_1/CMakeFiles/scratch_simulation_1.dir/rule
-.PHONY : scratch_simulation_1
+simulation_1: simulation_1/CMakeFiles/simulation_1.dir/rule
+.PHONY : simulation_1
 
 # fast build rule for target.
-scratch_simulation_1/fast:
-	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f scratch/simulation_1/CMakeFiles/scratch_simulation_1.dir/build.make scratch/simulation_1/CMakeFiles/scratch_simulation_1.dir/build
-.PHONY : scratch_simulation_1/fast
+simulation_1/fast:
+	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f simulation_1/CMakeFiles/simulation_1.dir/build.make simulation_1/CMakeFiles/simulation_1.dir/build
+.PHONY : simulation_1/fast
 
 # Convenience name for target.
-scratch/simulation_1/CMakeFiles/run-simulation_1.dir/rule:
-	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 scratch/simulation_1/CMakeFiles/run-simulation_1.dir/rule
-.PHONY : scratch/simulation_1/CMakeFiles/run-simulation_1.dir/rule
+simulation_1/CMakeFiles/run-simulation_1.dir/rule:
+	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 simulation_1/CMakeFiles/run-simulation_1.dir/rule
+.PHONY : simulation_1/CMakeFiles/run-simulation_1.dir/rule
 
 # Convenience name for target.
-run-simulation_1: scratch/simulation_1/CMakeFiles/run-simulation_1.dir/rule
+run-simulation_1: simulation_1/CMakeFiles/run-simulation_1.dir/rule
 .PHONY : run-simulation_1
 
 # fast build rule for target.
 run-simulation_1/fast:
-	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f scratch/simulation_1/CMakeFiles/run-simulation_1.dir/build.make scratch/simulation_1/CMakeFiles/run-simulation_1.dir/build
+	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f simulation_1/CMakeFiles/run-simulation_1.dir/build.make simulation_1/CMakeFiles/run-simulation_1.dir/build
 .PHONY : run-simulation_1/fast
 
-simulation_1.o: simulation_1.cc.o
-.PHONY : simulation_1.o
+# Convenience name for target.
+simulation_1/CMakeFiles/clean-simulation_1.dir/rule:
+	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 simulation_1/CMakeFiles/clean-simulation_1.dir/rule
+.PHONY : simulation_1/CMakeFiles/clean-simulation_1.dir/rule
+
+# Convenience name for target.
+clean-simulation_1: simulation_1/CMakeFiles/clean-simulation_1.dir/rule
+.PHONY : clean-simulation_1
+
+# fast build rule for target.
+clean-simulation_1/fast:
+	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f simulation_1/CMakeFiles/clean-simulation_1.dir/build.make simulation_1/CMakeFiles/clean-simulation_1.dir/build
+.PHONY : clean-simulation_1/fast
+
+main.o: main.cc.o
+.PHONY : main.o
 
 # target to build an object file
-simulation_1.cc.o:
-	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f scratch/simulation_1/CMakeFiles/scratch_simulation_1.dir/build.make scratch/simulation_1/CMakeFiles/scratch_simulation_1.dir/simulation_1.cc.o
-.PHONY : simulation_1.cc.o
+main.cc.o:
+	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f simulation_1/CMakeFiles/simulation_1.dir/build.make simulation_1/CMakeFiles/simulation_1.dir/main.cc.o
+.PHONY : main.cc.o
 
-simulation_1.i: simulation_1.cc.i
-.PHONY : simulation_1.i
+main.i: main.cc.i
+.PHONY : main.i
 
 # target to preprocess a source file
-simulation_1.cc.i:
-	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f scratch/simulation_1/CMakeFiles/scratch_simulation_1.dir/build.make scratch/simulation_1/CMakeFiles/scratch_simulation_1.dir/simulation_1.cc.i
-.PHONY : simulation_1.cc.i
+main.cc.i:
+	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f simulation_1/CMakeFiles/simulation_1.dir/build.make simulation_1/CMakeFiles/simulation_1.dir/main.cc.i
+.PHONY : main.cc.i
 
-simulation_1.s: simulation_1.cc.s
-.PHONY : simulation_1.s
+main.s: main.cc.s
+.PHONY : main.s
 
 # target to generate assembly for a file
-simulation_1.cc.s:
-	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f scratch/simulation_1/CMakeFiles/scratch_simulation_1.dir/build.make scratch/simulation_1/CMakeFiles/scratch_simulation_1.dir/simulation_1.cc.s
-.PHONY : simulation_1.cc.s
+main.cc.s:
+	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f simulation_1/CMakeFiles/simulation_1.dir/build.make simulation_1/CMakeFiles/simulation_1.dir/main.cc.s
+.PHONY : main.cc.s
 
 # Help Target
 help:
@@ -226,11 +240,12 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... clean-simulation_1"
 	@echo "... run-simulation_1"
-	@echo "... scratch_simulation_1"
-	@echo "... simulation_1.o"
-	@echo "... simulation_1.i"
-	@echo "... simulation_1.s"
+	@echo "... simulation_1"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 

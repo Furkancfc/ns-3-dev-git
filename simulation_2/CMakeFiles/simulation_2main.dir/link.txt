@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wno-pedantic -Wno-address-of-packed-member -Os -g -DNDEBUG CMakeFiles/simulation_2main.dir/main.cc.o -o ../build/simulation_2main   -L/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/build/lib 
