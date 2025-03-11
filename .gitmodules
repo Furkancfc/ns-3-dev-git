@@ -1,0 +1,3 @@
+[submodule "simulation_3/"]
+    path = ./simulation_3/
+    url = https://github.com/Furkancfc/ns-3-Simulation  # Update this line with the new URL
