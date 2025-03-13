@@ -1,4 +1,2 @@
-echo "" > output.log
-./ns3 clean >> output.log
-./ns3 configure >> output.log
-./ns3 build	>> output.log
+sudo make
+sudo cmake --build build --target run-simulation_4 -j 16
