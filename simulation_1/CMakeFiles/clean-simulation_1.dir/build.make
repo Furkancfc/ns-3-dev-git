@@ -67,8 +67,8 @@ include simulation_1/CMakeFiles/clean-simulation_1.dir/compiler_depend.make
 include simulation_1/CMakeFiles/clean-simulation_1.dir/progress.make
 
 simulation_1/CMakeFiles/clean-simulation_1:
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Cleaning up /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_1"
-	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_1 && rm -fr /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_1
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Cleaning up /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/main"
+	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_1 && rm -fr /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/main
 
 clean-simulation_1: simulation_1/CMakeFiles/clean-simulation_1
 clean-simulation_1: simulation_1/CMakeFiles/clean-simulation_1.dir/build.make

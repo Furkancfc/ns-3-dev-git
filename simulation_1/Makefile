@@ -163,18 +163,18 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-simulation_1/CMakeFiles/simulation_1.dir/rule:
-	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 simulation_1/CMakeFiles/simulation_1.dir/rule
-.PHONY : simulation_1/CMakeFiles/simulation_1.dir/rule
+simulation_1/CMakeFiles/main.dir/rule:
+	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 simulation_1/CMakeFiles/main.dir/rule
+.PHONY : simulation_1/CMakeFiles/main.dir/rule
 
 # Convenience name for target.
-simulation_1: simulation_1/CMakeFiles/simulation_1.dir/rule
-.PHONY : simulation_1
+main: simulation_1/CMakeFiles/main.dir/rule
+.PHONY : main
 
 # fast build rule for target.
-simulation_1/fast:
-	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f simulation_1/CMakeFiles/simulation_1.dir/build.make simulation_1/CMakeFiles/simulation_1.dir/build
-.PHONY : simulation_1/fast
+main/fast:
+	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f simulation_1/CMakeFiles/main.dir/build.make simulation_1/CMakeFiles/main.dir/build
+.PHONY : main/fast
 
 # Convenience name for target.
 simulation_1/CMakeFiles/run-simulation_1.dir/rule:
@@ -209,7 +209,7 @@ main.o: main.cc.o
 
 # target to build an object file
 main.cc.o:
-	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f simulation_1/CMakeFiles/simulation_1.dir/build.make simulation_1/CMakeFiles/simulation_1.dir/main.cc.o
+	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f simulation_1/CMakeFiles/main.dir/build.make simulation_1/CMakeFiles/main.dir/main.cc.o
 .PHONY : main.cc.o
 
 main.i: main.cc.i
@@ -217,7 +217,7 @@ main.i: main.cc.i
 
 # target to preprocess a source file
 main.cc.i:
-	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f simulation_1/CMakeFiles/simulation_1.dir/build.make simulation_1/CMakeFiles/simulation_1.dir/main.cc.i
+	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f simulation_1/CMakeFiles/main.dir/build.make simulation_1/CMakeFiles/main.dir/main.cc.i
 .PHONY : main.cc.i
 
 main.s: main.cc.s
@@ -225,7 +225,7 @@ main.s: main.cc.s
 
 # target to generate assembly for a file
 main.cc.s:
-	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f simulation_1/CMakeFiles/simulation_1.dir/build.make simulation_1/CMakeFiles/simulation_1.dir/main.cc.s
+	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev && $(MAKE) $(MAKESILENT) -f simulation_1/CMakeFiles/main.dir/build.make simulation_1/CMakeFiles/main.dir/main.cc.s
 .PHONY : main.cc.s
 
 # Help Target
@@ -242,7 +242,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... clean-simulation_1"
 	@echo "... run-simulation_1"
-	@echo "... simulation_1"
+	@echo "... main"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

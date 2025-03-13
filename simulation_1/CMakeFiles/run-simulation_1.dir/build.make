@@ -66,9 +66,9 @@ include simulation_1/CMakeFiles/run-simulation_1.dir/compiler_depend.make
 # Include the progress variables for this target.
 include simulation_1/CMakeFiles/run-simulation_1.dir/progress.make
 
-simulation_1/CMakeFiles/run-simulation_1: simulation_1/main.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Running simulation_1..."
-	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_1 && /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_1/main
+simulation_1/CMakeFiles/run-simulation_1: main/main
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Running MAVLink simulation..."
+	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/main && /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/main/main
 
 run-simulation_1: simulation_1/CMakeFiles/run-simulation_1
 run-simulation_1: simulation_1/CMakeFiles/run-simulation_1.dir/build.make

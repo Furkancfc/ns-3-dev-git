@@ -353,7 +353,7 @@
 /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/src/zigbee/CMakeFiles/install.dir
 /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/src/zigbee/CMakeFiles/install/local.dir
 /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/src/zigbee/CMakeFiles/install/strip.dir
-/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_1/CMakeFiles/simulation_1.dir
+/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_1/CMakeFiles/main.dir
 /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_1/CMakeFiles/run-simulation_1.dir
 /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_1/CMakeFiles/clean-simulation_1.dir
 /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_1/CMakeFiles/edit_cache.dir
@@ -380,6 +380,15 @@
 /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_3/CMakeFiles/install.dir
 /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_3/CMakeFiles/install/local.dir
 /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_3/CMakeFiles/install/strip.dir
+/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_4/CMakeFiles/simulation_4.dir
+/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_4/CMakeFiles/run-simulation_4.dir
+/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_4/CMakeFiles/clean-simulation_4.dir
+/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_4/CMakeFiles/edit_cache.dir
+/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_4/CMakeFiles/rebuild_cache.dir
+/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_4/CMakeFiles/list_install_components.dir
+/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_4/CMakeFiles/install.dir
+/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_4/CMakeFiles/install/local.dir
+/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_4/CMakeFiles/install/strip.dir
 /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/examples/CMakeFiles/edit_cache.dir
 /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/examples/CMakeFiles/rebuild_cache.dir
 /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/examples/CMakeFiles/list_install_components.dir

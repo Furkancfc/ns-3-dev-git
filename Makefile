@@ -1424,17 +1424,17 @@ zigbee/fast:
 .PHONY : zigbee/fast
 
 #=============================================================================
-# Target rules for targets named simulation_1
+# Target rules for targets named main
 
 # Build rule for target.
-simulation_1: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 simulation_1
-.PHONY : simulation_1
+main: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main
+.PHONY : main
 
 # fast build rule for target.
-simulation_1/fast:
-	$(MAKE) $(MAKESILENT) -f simulation_1/CMakeFiles/simulation_1.dir/build.make simulation_1/CMakeFiles/simulation_1.dir/build
-.PHONY : simulation_1/fast
+main/fast:
+	$(MAKE) $(MAKESILENT) -f simulation_1/CMakeFiles/main.dir/build.make simulation_1/CMakeFiles/main.dir/build
+.PHONY : main/fast
 
 #=============================================================================
 # Target rules for targets named run-simulation_1
@@ -1539,6 +1539,45 @@ clean-simulation_3: cmake_check_build_system
 clean-simulation_3/fast:
 	$(MAKE) $(MAKESILENT) -f simulation_3/CMakeFiles/clean-simulation_3.dir/build.make simulation_3/CMakeFiles/clean-simulation_3.dir/build
 .PHONY : clean-simulation_3/fast
+
+#=============================================================================
+# Target rules for targets named simulation_4
+
+# Build rule for target.
+simulation_4: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 simulation_4
+.PHONY : simulation_4
+
+# fast build rule for target.
+simulation_4/fast:
+	$(MAKE) $(MAKESILENT) -f simulation_4/CMakeFiles/simulation_4.dir/build.make simulation_4/CMakeFiles/simulation_4.dir/build
+.PHONY : simulation_4/fast
+
+#=============================================================================
+# Target rules for targets named run-simulation_4
+
+# Build rule for target.
+run-simulation_4: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 run-simulation_4
+.PHONY : run-simulation_4
+
+# fast build rule for target.
+run-simulation_4/fast:
+	$(MAKE) $(MAKESILENT) -f simulation_4/CMakeFiles/run-simulation_4.dir/build.make simulation_4/CMakeFiles/run-simulation_4.dir/build
+.PHONY : run-simulation_4/fast
+
+#=============================================================================
+# Target rules for targets named clean-simulation_4
+
+# Build rule for target.
+clean-simulation_4: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean-simulation_4
+.PHONY : clean-simulation_4
+
+# fast build rule for target.
+clean-simulation_4/fast:
+	$(MAKE) $(MAKESILENT) -f simulation_4/CMakeFiles/clean-simulation_4.dir/build.make simulation_4/CMakeFiles/clean-simulation_4.dir/build
+.PHONY : clean-simulation_4/fast
 
 #=============================================================================
 # Target rules for targets named scratch_scratch-simulator
@@ -1661,6 +1700,7 @@ help:
 	@echo "... clean-simulation_1"
 	@echo "... clean-simulation_2"
 	@echo "... clean-simulation_3"
+	@echo "... clean-simulation_4"
 	@echo "... copy_all_headers"
 	@echo "... doxygen"
 	@echo "... doxygen-no-build"
@@ -1669,6 +1709,7 @@ help:
 	@echo "... run-simulation_1"
 	@echo "... run-simulation_2"
 	@echo "... run-simulation_3"
+	@echo "... run-simulation_4"
 	@echo "... sphinx"
 	@echo "... sphinx_contributing"
 	@echo "... sphinx_installation"
@@ -1738,6 +1779,7 @@ help:
 	@echo "... internet-apps"
 	@echo "... lr-wpan"
 	@echo "... lte"
+	@echo "... main"
 	@echo "... mesh"
 	@echo "... mobility"
 	@echo "... netanim"
@@ -1754,9 +1796,9 @@ help:
 	@echo "... scratch_nested-subdir_scratch-nested-subdir-executable"
 	@echo "... scratch_scratch-simulator"
 	@echo "... scratch_subdir_scratch-subdir"
-	@echo "... simulation_1"
 	@echo "... simulation_2"
 	@echo "... simulation_3"
+	@echo "... simulation_4"
 	@echo "... sixlowpan"
 	@echo "... spectrum"
 	@echo "... stats"

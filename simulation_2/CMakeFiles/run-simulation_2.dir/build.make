@@ -66,7 +66,7 @@ include simulation_2/CMakeFiles/run-simulation_2.dir/compiler_depend.make
 # Include the progress variables for this target.
 include simulation_2/CMakeFiles/run-simulation_2.dir/progress.make
 
-simulation_2/CMakeFiles/run-simulation_2: simulation_2/main.cc
+simulation_2/CMakeFiles/run-simulation_2: main/main
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Running simulation_2..."
 	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_2 && /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_2/main
 

@@ -197,6 +197,7 @@ include_directories(${CMAKE_SOURCE_DIR}/src/)
 add_subdirectory(simulation_1)
 add_subdirectory(simulation_2)
 add_subdirectory(simulation_3)
+add_subdirectory(simulation_4)
 
 # Build NS library examples
 add_subdirectory(examples)

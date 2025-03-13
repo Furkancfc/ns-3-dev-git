@@ -8,4 +8,4 @@ set(ALL_INCLUDE_DIRS
 )
 
 # Link libraries
-include(../CMakeTemplate.txt)
+include(../CMakeTemplate.cmake)

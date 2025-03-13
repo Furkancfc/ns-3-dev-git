@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "../simulation_2/simulation_2/main"
-  "../simulation_2/simulation_2/main.pdb"
+  "../main/main"
+  "../main/main.pdb"
   "CMakeFiles/main.dir/main.cc.o"
   "CMakeFiles/main.dir/main.cc.o.d"
 )

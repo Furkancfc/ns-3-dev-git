@@ -1,9 +1,10 @@
-set(PROJECT_NAME simulation_1)
-set(EXECUTABLE_PREFIX )
-set(EXECUTABLE_NAME main)
+message(STATUS "Processing simulation_1/CMakeLists.txt")
 # Set MAVLink paths
 set(MAVLINK_ROOT "/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/mavlink" CACHE PATH "MAVLink root directory")
 set(MAVLINK_INCLUDE_DIRS "${MAVLINK_ROOT}/generated/include")
+set(EXECUTABLE_PREFIX )
+set(EXECUTABLE_NAME main)
+set(EXECUTABLE_OUTPUT_DIR ${CMAKE_BINARY_DIR}/main)
 
 # Debug output
 message(STATUS "Current Source Dir: ${CMAKE_CURRENT_SOURCE_DIR}")
@@ -34,5 +35,43 @@ set(ALL_INCLUDE_DIRS
     ${MAVLINK_INCLUDE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
+
 message(STATUS "Found MAVLink headers at: ${MAVLINK_INCLUDE_DIR}")
-include(../CMakeTemplate.txt)
+message(STATUS "CMAKE_BINARY_DIR: ${CMAKE_BINARY_DIR}")
+message(STATUS "All Includes: ${ALL_INCLUDE_DIRS}")
+message(STATUS "Building ${EXECUTABLE_NAME} example to ${EXECUTABLE_OUTPUT_DIR}")
+
+# Ensure the output directory exists
+file(MAKE_DIRECTORY ${EXECUTABLE_OUTPUT_DIR})
+
+# Add executable
+add_executable(${EXECUTABLE_PREFIX}${EXECUTABLE_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/${EXECUTABLE_NAME}.cc)
+
+# Link libraries
+target_link_libraries(${EXECUTABLE_PREFIX}${EXECUTABLE_NAME} ${ns3-libs})
+
+# Include directories
+target_include_directories(${EXECUTABLE_PREFIX}${EXECUTABLE_NAME} PRIVATE ${ALL_INCLUDE_DIRS})
+# Set output directory and name
+set_target_properties(
+    ${EXECUTABLE_PREFIX}${EXECUTABLE_NAME}
+    PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${EXECUTABLE_OUTPUT_DIR}
+    OUTPUT_NAME ${EXECUTABLE_PREFIX}${EXECUTABLE_NAME}
+)
+
+# Disable -Werror for this target
+target_compile_options(${EXECUTABLE_PREFIX}${EXECUTABLE_NAME} PRIVATE -Wno-error)
+
+# Add custom target to run the executable
+add_custom_target(run-simulation_1
+    COMMAND ${EXECUTABLE_OUTPUT_DIR}/${EXECUTABLE_PREFIX}${EXECUTABLE_NAME}
+    DEPENDS ${EXECUTABLE_PREFIX}${EXECUTABLE_NAME}
+    WORKING_DIRECTORY ${EXECUTABLE_OUTPUT_DIR}
+    COMMENT "Running MAVLink simulation..."
+)
+add_custom_target(
+    clean-simulation_1
+    COMMAND rm -fr ${EXECUTABLE_OUTPUT_DIR}
+    COMMENT "Cleaning up ${EXECUTABLE_OUTPUT_DIR}"
+)
