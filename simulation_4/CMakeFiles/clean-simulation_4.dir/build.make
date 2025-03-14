@@ -68,7 +68,7 @@ include simulation_4/CMakeFiles/clean-simulation_4.dir/progress.make
 
 simulation_4/CMakeFiles/clean-simulation_4:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Cleaning up /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_4"
-	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_4 && rm -fr /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_4
+	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_4 && /usr/bin/cmake -E remove_directory /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_4
 
 clean-simulation_4: simulation_4/CMakeFiles/clean-simulation_4
 clean-simulation_4: simulation_4/CMakeFiles/clean-simulation_4.dir/build.make

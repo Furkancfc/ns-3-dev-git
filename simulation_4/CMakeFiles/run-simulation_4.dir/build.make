@@ -69,6 +69,7 @@ include simulation_4/CMakeFiles/run-simulation_4.dir/progress.make
 simulation_4/CMakeFiles/run-simulation_4: main/main
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Running simulation_4..."
 	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_4 && /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_4/main
+	cd /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_4 && /mnt/nvme0n1p6/Klasorler/Dersler/BitirmeProje/ns-3-dev/simulation_4/main
 
 run-simulation_4: simulation_4/CMakeFiles/run-simulation_4
 run-simulation_4: simulation_4/CMakeFiles/run-simulation_4.dir/build.make

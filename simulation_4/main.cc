@@ -4,48 +4,57 @@
 #include "ns3/mobility-module.h"
 #include "ns3/network-module.h"
 #include "ns3/point-to-point-module.h"
+#include "ns3/tcp-socket-factory.h"
 #include "ns3/trace-helper.h"
-#include "ns3/udp-socket.h"
 
 #include <ctime>
-#include <fcntl.h> // For open()
+#include <fcntl.h>
 #include <fstream>
 #include <iomanip>
 #include <mutex>
-#include <sys/stat.h> // For file size
-#include <unistd.h>   // For read() and close()
+#include <sys/stat.h>
+#include <unistd.h>
 #include <vector>
+
 using namespace ns3;
 
 NS_LOG_COMPONENT_DEFINE("VideoStreamSimulation");
 
 // Global variables
 std::mutex bitrateMutex;
-uint32_t targetBitrate = 5000000; // Default bitrate: 5 Mbps
+uint32_t targetBitrate = 5000000; // 5 Mbps
 Ipv4InterfaceContainer interfaces;
 Ptr<OutputStreamWrapper> logStream;
 uint32_t totalFramesSent = 0;
-const uint32_t MAX_FRAMES = 300; // 10 seconds at 30 fps
+const uint32_t MAX_FRAMES = 300;
 NodeContainer nodes;
 
-// Function to get timestamp for logging
-std::string
-GetTimestamp()
+// Prototypes
+std::string GetTimestamp();
+void LogToFile(const std::string& message);
+double CalculatePathLoss(uint32_t senderNodeId, uint32_t receiverNodeId);
+void AdjustBitrate(uint32_t senderNodeId, uint32_t receiverNodeId);
+void RecvPacket(Ptr<Socket> socket);
+void SndPacket(std::vector<uint8_t>& frameBuffer, Ptr<Socket> senderSocket);
+void ScheduleNextFrame(std::vector<uint8_t>& frameBuffer, Ptr<Socket> senderSocket, uint32_t frameIndex);
+void VideoStream(int videoFd, Ptr<Socket> senderSocket);
+void HandleConnection(Ptr<Socket> socket, const Address& from);
+void HandleConnectionSuccess(Ptr<Socket> socket);
+void HandleConnectionError(Ptr<Socket> socket);
+
+// Implementation
+std::string GetTimestamp()
 {
     std::time_t now = std::time(nullptr);
     char timestamp[100];
     std::strftime(timestamp, sizeof(timestamp), "%Y-%m-%d %H:%M:%S", std::localtime(&now));
-
-    // Add ns-3 simulation time with nanosecond precision
-    double simTime = Simulator::Now().GetNanoSeconds() / 1e9;
+    double simTime = Simulator::Now().GetSeconds();
     std::ostringstream oss;
     oss << timestamp << " (sim_time=" << std::fixed << std::setprecision(9) << simTime << "s)";
     return oss.str();
 }
 
-// Custom logging function
-void
-LogToFile(const std::string& message)
+void LogToFile(const std::string& message)
 {
     if (logStream)
     {
@@ -53,246 +62,174 @@ LogToFile(const std::string& message)
     }
 }
 
-// Function to calculate path loss between nodes
-double
-CalculatePathLoss(uint32_t senderNodeId, uint32_t receiverNodeId)
+double CalculatePathLoss(uint32_t senderNodeId, uint32_t receiverNodeId)
 {
-    LogToFile("Calculating path loss between nodes");
-
     Ptr<Node> senderNode = nodes.Get(senderNodeId);
     Ptr<Node> receiverNode = nodes.Get(receiverNodeId);
     Ptr<MobilityModel> senderMobility = senderNode->GetObject<MobilityModel>();
     Ptr<MobilityModel> receiverMobility = receiverNode->GetObject<MobilityModel>();
 
     double distance = senderMobility->GetDistanceFrom(receiverMobility);
-    if (distance < 1.0)
-    {
-        distance = 1.0;
-    }
-
-    double pathLoss = 20 * log10(distance) + 20 * log10(4 * M_PI / 3e8);
-
-    std::ostringstream oss;
-    oss << "Distance: " << distance << "m, Path loss: " << pathLoss << " dB";
-    LogToFile(oss.str());
-
-    return pathLoss;
+    distance = std::max(distance, 1.0);
+    return 20 * log10(distance) + 20 * log10(4 * M_PI / 3e8);
 }
 
-// Function to adjust bitrate based on path loss
-void
-AdjustBitrate(uint32_t senderNodeId, uint32_t receiverNodeId)
+void AdjustBitrate(uint32_t senderNodeId, uint32_t receiverNodeId)
 {
-    LogToFile("Adjusting bitrate");
-
-    Ptr<Node> senderNode = NodeList::GetNode(senderNodeId);
-    Ptr<Node> receiverNode = NodeList::GetNode(receiverNodeId);
-
     double pathLoss = CalculatePathLoss(senderNodeId, receiverNodeId);
-
+    
     std::lock_guard<std::mutex> lock(bitrateMutex);
     if (pathLoss > 50.0)
     {
-        targetBitrate =
-            std::max(targetBitrate / 2, static_cast<uint32_t>(1000000)); // Minimum 1 Mbps
-        LogToFile("High path loss (" + std::to_string(pathLoss) + " dB), reducing bitrate to " +
-                  std::to_string(targetBitrate / 1e6) + " Mbps");
+        targetBitrate = std::max(targetBitrate / 2, 1000000U);
+        LogToFile("High path loss - New bitrate: " + std::to_string(targetBitrate/1e6) + " Mbps");
     }
     else
     {
-        targetBitrate =
-            std::min(targetBitrate * 2, static_cast<uint32_t>(50000000)); // Maximum 50 Mbps
-        LogToFile("Low path loss (" + std::to_string(pathLoss) + " dB), increasing bitrate to " +
-                  std::to_string(targetBitrate / 1e6) + " Mbps");
+        targetBitrate = std::min(targetBitrate * 2, 50000000U);
+        LogToFile("Low path loss - New bitrate: " + std::to_string(targetBitrate/1e6) + " Mbps");
     }
 
     if (totalFramesSent < MAX_FRAMES)
     {
-        Simulator::ScheduleWithContext(senderNodeId,
-                                       Seconds(1.0),
-                                       &AdjustBitrate,
-                                       senderNodeId,
-                                       receiverNodeId);
+        Simulator::Schedule(Seconds(1.0), &AdjustBitrate, senderNodeId, receiverNodeId);
     }
 }
 
-// Function to handle received packets
-void
-RecvPacket(Ptr<Socket> socket, Address from)
+void RecvPacket(Ptr<Socket> socket)
 {
     Ptr<Packet> packet;
-    while ((packet = socket->RecvFrom(from)))
+    while ((packet = socket->Recv()))
     {
-        auto addr = InetSocketAddress::ConvertFrom(from);
-        LogToFile("Received packet: size=" + std::to_string(packet->GetSize()) + " bytes, from=" +
-                  std::to_string(addr.GetIpv4().Get()) + ":" + std::to_string(addr.GetPort()));
+        LogToFile("Received packet: " + std::to_string(packet->GetSize()) + " bytes");
     }
 }
 
-// Function to send the next frame
-void
-SndPacket(std::vector<uint8_t>& frameBuffer,
-          Ptr<Socket> senderSocket,
-          InetSocketAddress remoteAddress)
+void SndPacket(std::vector<uint8_t>& frameBuffer, Ptr<Socket> senderSocket)
 {
     std::lock_guard<std::mutex> lock(bitrateMutex);
     Ptr<Packet> packet = Create<Packet>(frameBuffer.data(), frameBuffer.size());
-	Address remote = remoteAddress.GetIpv4();
-    int bytes =
-        senderSocket->SendTo(packet, 0, remote);
-
-    if (bytes > 0)
+    
+    if (senderSocket->Send(packet) > 0)
     {
         totalFramesSent++;
-        LogToFile("Sent frame " + std::to_string(totalFramesSent) + "/" +
-                  std::to_string(MAX_FRAMES) + " (size: " + std::to_string(bytes) + " bytes)");
-    }
-    else
-    {
-        LogToFile("Failed to send frame");
+        LogToFile("Sent frame " + std::to_string(totalFramesSent) + "/" + std::to_string(MAX_FRAMES));
     }
 }
 
-// Function to stream video
-void
-VideoStream(int videoFd, Ptr<Socket> senderSocket, InetSocketAddress remoteAddress)
+void ScheduleNextFrame(std::vector<uint8_t>& frameBuffer, Ptr<Socket> senderSocket, uint32_t frameIndex)
 {
-    try
-    {
-        LogToFile("Starting video stream");
-        if (videoFd == -1)
-        {
-            LogToFile("ERROR: Cannot open file");
-            perror("Open error");
-            return;
-        }
-        uint32_t frameWidth = 640, frameHeight = 480;
-        double targetFrameRate = 30.0;
-        uint32_t frameSize = frameWidth * frameHeight * 3 / 2;
-        std::vector<uint8_t> frameBuffer(frameSize);
-        ssize_t bytesRead = read(videoFd, frameBuffer.data(), frameBuffer.size());
+    if (frameIndex >= MAX_FRAMES) return;
 
-        if (bytesRead == -1)
-        {
-            LogToFile("ERROR: Failed to read video file.");
-            perror("Read error");
-            close(videoFd);
-            Simulator::Destroy();
-            return;
-        }
-        else if (bytesRead == 0)
-        {
-            LogToFile("End of video file reached.");
-            close(videoFd);
-            return;
-        }
-        LogToFile("Read " + std::to_string(bytesRead) + " bytes from video file.");
+    Simulator::Schedule(Seconds(1.0/30.0), &SndPacket, frameBuffer, senderSocket);
+    Simulator::Schedule(Seconds(1.0/30.0), &ScheduleNextFrame, frameBuffer, senderSocket, frameIndex + 1);
+}
 
-        // Create and configure receiver socket
-        LogToFile("Socket configuration completed");
-        // Schedule subsequent frames
-        for (uint32_t i = 1; i < MAX_FRAMES; i++)
-        {
-            Simulator::Schedule(Seconds(i * (1.0 / targetFrameRate)),
-                                &SndPacket,
-                                frameBuffer,
-                                senderSocket,
-                                remoteAddress
-							);
-        }
-    }
-    catch (const std::exception& e)
+void VideoStream(int videoFd, Ptr<Socket> senderSocket)
+{
+    const uint32_t frameSize = 640 * 480 * 3 / 2;
+    std::vector<uint8_t> frameBuffer(frameSize);
+
+    ssize_t bytesRead = read(videoFd, frameBuffer.data(), frameSize);
+    if (bytesRead > 0)
     {
-        std::cerr << e.what() << '\n';
-        Simulator::Destroy();
+        ScheduleNextFrame(frameBuffer, senderSocket, 0);
     }
 }
 
-int
-main(int argc, char* argv[])
+void HandleConnection(Ptr<Socket> socket, const Address& from)
 {
-    // Initialize logging
+    std::ostringstream oss;
+    oss << "Connection established with " << InetSocketAddress::ConvertFrom(from).GetIpv4();
+    LogToFile(oss.str());
+    oss.str("");
+    socket->SetRecvCallback(MakeCallback(&RecvPacket));
+}
+
+void HandleConnectionSuccess(Ptr<Socket> socket)
+{
+    LogToFile("Connection successfully established");
+}
+
+void HandleConnectionError(Ptr<Socket> socket)
+{
+    LogToFile("Connection error: " + std::to_string(socket->GetErrno()));
+}
+
+int main(int argc, char* argv[])
+{
+    // Enable logging
+    LogComponentEnable("VideoStreamSimulation", LOG_LEVEL_ALL);
+    LogComponentEnable("TcpSocket", LOG_LEVEL_DEBUG);
+    
     AsciiTraceHelper ascii;
     logStream = ascii.CreateFileStream("simulation.log");
-    LogToFile("Simulation started");
 
-    Time::SetResolution(Time::NS);
-    std::string videoFilePath = "video.copy.yuv";
-
+    // Network setup
+    nodes.Create(2);
+    
     PointToPointHelper pointToPoint;
     pointToPoint.SetDeviceAttribute("DataRate", StringValue("5Mbps"));
     pointToPoint.SetChannelAttribute("Delay", StringValue("1000ms"));
-    LogToFile("Network configuration completed");
-
-    nodes.Create(2);
+    
     NetDeviceContainer devices = pointToPoint.Install(nodes);
-
+    
     InternetStackHelper internet;
     internet.Install(nodes);
-
+    
     Ipv4AddressHelper ipv4;
     ipv4.SetBase("10.0.0.0", "255.255.255.0");
     interfaces = ipv4.Assign(devices);
 
-
+    // Mobility
     MobilityHelper mobility;
     mobility.SetMobilityModel("ns3::ConstantPositionMobilityModel");
     mobility.Install(nodes);
-    LogToFile("Mobility model installed");
+    nodes.Get(0)->GetObject<MobilityModel>()->SetPosition(Vector(0, 0, 0));
+    nodes.Get(1)->GetObject<MobilityModel>()->SetPosition(Vector(100, 0, 0));
 
-    int videoFd = open(videoFilePath.c_str(), O_RDONLY);
+    // Sockets
+    Ptr<Socket> senderSocket = Socket::CreateSocket(nodes.Get(0), TcpSocketFactory::GetTypeId());
+    Ptr<Socket> receiverSocket = Socket::CreateSocket(nodes.Get(1), TcpSocketFactory::GetTypeId());
+
+    // Receiver setup
+    InetSocketAddress receiverLocalAddress(interfaces.GetAddress(1), 8080);
+    receiverSocket->Bind(receiverLocalAddress);
+    receiverSocket->Listen();
+    receiverSocket->SetAcceptCallback(MakeNullCallback<bool, Ptr<Socket>, const Address&>(),
+                                     MakeCallback(&HandleConnection));
+
+    // Sender setup
+    senderSocket->SetConnectCallback(
+        MakeCallback(&HandleConnectionSuccess),
+        MakeCallback(&HandleConnectionError)
+    );
+    InetSocketAddress remoteAddress(interfaces.GetAddress(1), 8080);
+    
+    // Schedule connection attempt
+    Simulator::Schedule(Seconds(1.0), &Socket::Connect, senderSocket, remoteAddress);
+
+    // Video file
+    int videoFd = open("video.copy.yuv", O_RDONLY);
     if (videoFd == -1)
     {
-        LogToFile("ERROR: Cannot open video file");
-        perror("Open error");
+        LogToFile("Error opening video file");
         return 1;
     }
-    Ptr<Node> senderNode = nodes.Get(0);
-    Ptr<Node> receiverNode = nodes.Get(1);
-    Ptr<Socket> ssocket =
-        Socket::CreateSocket(senderNode, TypeId::LookupByName("ns3::UdpSocketFactory"));
-    Ptr<Socket> rsocket =
-        Socket::CreateSocket(receiverNode, TypeId::LookupByName("ns3::UdpSocketFactory"));
-    InetSocketAddress localAddress = InetSocketAddress(interfaces.GetAddress(senderNode->GetId()),8080);
-    InetSocketAddress remoteAddress =  InetSocketAddress(interfaces.GetAddress(receiverNode->GetId()), 8080);
-	std::ostringstream oss;
-    oss << "Node IPs configured - Node 0: " << localAddress.GetIpv4() << ":" << localAddress.GetPort()
-        << ", Node 1: " << remoteAddress.GetIpv4()<< ":" << remoteAddress.GetPort();
-    LogToFile(oss.str());
 
-    if (rsocket->Bind(localAddress) != 0)
-    {
-        LogToFile("Failed to bind receiver socket");
-        return -1;
-    }
+    // Schedule video streaming
+    Simulator::Schedule(Seconds(1.5), &VideoStream, videoFd, senderSocket);
 
-    // Create and configure sender socket
-    if (ssocket->Connect(remoteAddress) != 0)
-    {
-        LogToFile("Failed to connect sender socket");
-        return -1;
-    }
-    Simulator::ScheduleWithContext(receiverNode->GetId(),
-                                   Seconds(0.0),
-                                   &RecvPacket,
-                                   rsocket,
-                                   localAddress);
-    Simulator::ScheduleWithContext(senderNode->GetId(),
-                                   Seconds(1.0),
-                                   &AdjustBitrate,
-                                   senderNode->GetId(),
-                                   receiverNode->GetId());
-    Simulator::ScheduleWithContext(
-        senderNode->GetId(),
-        Seconds(1.0),
-        &VideoStream,
-        videoFd,
-		ssocket,
-        InetSocketAddress(interfaces.GetAddress(receiverNode->GetId()), 8080));
+    // Bitrate adjustment
+    Simulator::Schedule(Seconds(2.0), &AdjustBitrate, 0, 1);
+
+    // Run simulation
+    Simulator::Stop(Seconds(20.0));
     Simulator::Run();
     Simulator::Destroy();
-    LogToFile("Simulation completed");
 
+    // Cleanup
     close(videoFd);
+    LogToFile("Simulation completed");
     return 0;
 }
